@@ -1,5 +1,4 @@
-addEventListener("fetch", event => {
-  const data = {
+{
     name: "Kiraky Blog",
     short_name: "Kiraky Blog",
     description: "Kiraky.com Adalah Blog Kumpulan Tips dan Trik, Informasi Terbaru, Kejadian Unik dan Aneh, Lowongan Kerja dan Tutorial Blogging",
@@ -117,14 +116,3 @@ addEventListener("fetch", event => {
       src: "https://cdn.jsdelivr.net/gh/kirakyblog/blog@master/logo/serviceworker.js"
     }
   }
-
-  const json = JSON.stringify(data, null, 2)
-
-  return event.respondWith(
-    new Response(json, {
-      headers: {
-        "content-type": "application/json;charset=UTF-8"
-      }
-    })
-  )
-})
