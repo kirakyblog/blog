@@ -1,109 +1,68 @@
-(function() {
-    var nativeAddAll = Cache.prototype.addAll;
-    var userAgent = navigator.userAgent.match(/(Firefox|Chrome)/(d + .) / );
-
-
-    if (userAgent) {
-        var agent = userAgent[1];
-        var version = parseInt(userAgent[2]);
-    }
-
-    if (
-        nativeAddAll && (!userAgent ||
-            (agent === 'Firefox' && version >= 46) ||
-            (agent === 'Chrome' && version >= 50)
-        )
-    ) {
-        return;
-    }
-
-    Cache.prototype.addAll = function addAll(requests) {
-        var cache = this;
-
-
-        function NetworkError(message) {
-            this.name = 'NetworkError';
-            this.code = 19;
-            this.message = message;
-        }
-
-        NetworkError.prototype = Object.create(Error.prototype);
-
-        return Promise.resolve().then(function() {
-            if (arguments.length < 1) throw new TypeError();
-
-
-            var sequence = [];
-
-            requests = requests.map(function(request) {
-                if (request instanceof Request) {
-                    return request;
-                } else {
-                    return String(request);
-                }
-            });
-
-            return Promise.all(
-                requests.map(function(request) {
-                    if (typeof request === 'string') {
-                        request = new Request(request);
-                    }
-
-                    var scheme = new URL(request.url).protocol;
-
-                    if (scheme !== 'http:' && scheme !== 'https:') {
-                        throw new NetworkError("Invalid scheme");
-                    }
-
-                    return fetch(request.clone());
-                })
-            );
-        }).then(function(responses) {
-            // If some of the responses has not OK-eish status,
-            // then whole operation should reject
-            if (responses.some(function(response) {
-                    return !response.ok;
-                })) {
-                throw new NetworkError('Incorrect response status');
-            }
-
-
-            return Promise.all(
-                responses.map(function(response, i) {
-                    return cache.put(requests[i], response);
-                })
-            );
-        }).then(function() {
-            return undefined;
-        });
-    };
-
-    Cache.prototype.add = function add(request) {
-        return this.addAll([request]);
-    };
-}());
-
-self.addEventListener('install', function(e) {
-    e.waitUntil(
-        caches.open('kirakyblog').then(function(cache) {
-            return cache.addAll([
-                '/'
-            ]);
-        })
-    );
-});
-self.addEventListener('fetch', function(event) {
-    console.log(event.request.url);
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
-        })
-    );
+const js = `
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+if (workbox) {
+workbox.core.skipWaiting();
+workbox.core.clientsClaim();
+workbox.core.setCacheNameDetails({
+  prefix: 'thn-sw',
+  suffix: 'v22',
+  precache: 'install-time',
+  runtime: 'run-time'
 });
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(registrations) {
- for(let registration of registrations) {
-  registration.unregister()
-} });
+const FALLBACK_HTML_URL = 'https://offline.kiraky.workers.dev/';
+const version = workbox.core.cacheNames.suffix;
+workbox.precaching.precacheAndRoute([{url: FALLBACK_HTML_URL, revision: null},{url: '/manifest.json', revision: null},{url: '/main/favicon.ico', revision: null}]);
+
+workbox.routing.setDefaultHandler(new workbox.strategies.NetworkOnly());
+
+workbox.routing.registerRoute(
+    new RegExp('.(?:css|js|png|gif|jpg|svg|ico)$'),
+    new workbox.strategies.CacheFirst({
+        cacheName: 'images-js-css-' + version,
+        plugins: [
+            new workbox.expiration.ExpirationPlugin({
+                maxAgeSeconds: 60 * 24 * 60 * 60,
+                maxEntries:200,
+                purgeOnQuotaError: true
+            })
+        ],
+    }),'GET'
+);
+
+workbox.routing.setCatchHandler(({event}) => {
+      switch (event.request.destination) {
+        case 'document':
+        return caches.match(FALLBACK_HTML_URL);
+      break;
+      default:
+        return Response.error();
+  }
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches
+      .keys()
+      .then(keys => keys.filter(key => !key.endsWith(version)))
+      .then(keys => Promise.all(keys.map(key => caches.delete(key))))
+  );
+});
+
 }
+else {
+    console.log('Oops! Workbox did not load');
+}
+`
+
+async function handleRequest(request) {
+  return new Response(js, {
+    headers: {
+      "content-type": "application/javascript;charset=UTF-8",
+    },
+  })
+}
+
+addEventListener("fetch", event => {
+  return event.respondWith(handleRequest(event.request))
+})
