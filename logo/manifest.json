@@ -5,55 +5,55 @@ addEventListener("fetch", event => {
     description: "Kiraky.com Adalah Blog Kumpulan Tips dan Trik, Informasi Terbaru, Kejadian Unik dan Aneh, Lowongan Kerja dan Tutorial Blogging",
     display: "standalone",
     prefer_related_applications: false,
-    start_url: "https:\/\/www.kiraky.com\/?utm_source=homescreen",
+    start_url: "\/\/www.kiraky.com\/?utm_source=homescreen",
     scope: "\/",
     background_color: "#ffffff",
     theme_color: "#d6d6d6",
     icons: [
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-512x512.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-512x512.png",
       sizes: "512x512",
       type: "image\/png",
       density: "4.0",
       purpose: "any maskable"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-192x192.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-192x192.png",
       sizes: "192x192",
       type: "image\/png",
       density: "4.0",
       purpose: "any maskable"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-144x144.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-144x144.png",
       sizes: "144x144",
       type: "image\/png",
       density: "3.0",
       purpose: "any maskable"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-96x96.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-96x96.png",
       sizes: "96x96",
       type: "image\/png",
       density: "2.0",
       purpose: "any maskable"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-72x72.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-72x72.png",
       sizes: "72x72",
       type: "image\/png",
       density: "1.5",
       purpose: "any maskable"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-48x48.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-48x48.png",
       sizes: "48x48",
       type: "image\/png",
       density: "1.0",
       purpose: "any maskable"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-36x36.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-36x36.png",
       sizes: "36x36",
       type: "image\/png",
       density: "0.75",
@@ -65,10 +65,10 @@ addEventListener("fetch", event => {
       name: "Kiraky Home",
       short_name: "Kiraky Home",
       description: "Kiraky.com Adalah Blog Kumpulan Tips dan Trik, Informasi Terbaru, Kejadian Unik dan Aneh, Lowongan Kerja dan Tutorial Blogging",
-      url: "https:\/\/www.kiraky.com\/?utm_source=homescreen",
+      url: "\/\/www.kiraky.com\/?utm_source=homescreen",
      icons: [
           {
-          src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-192x192.png",
+          src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-192x192.png",
           sizes: "192x192"
           }
         ]
@@ -77,10 +77,10 @@ addEventListener("fetch", event => {
       name: "Blogger Widgets",
       short_name: "Blogger Widgets",
       description: "Tutorial widget blogger.",
-      url: "https:\/\/www.kiraky.com\/search\/label\/Widgets?utm_source=homescreen",
+      url: "\/\/www.kiraky.com\/search\/label\/Widgets?utm_source=homescreen",
       icons: [
           {
-          src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-192x192.png",
+          src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/icon-192x192.png",
           sizes: "192x192"
           }
         ]
@@ -88,33 +88,33 @@ addEventListener("fetch", event => {
     ],
     screenshots: [
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr1.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr1.png",
       type: "image\/png",
       sizes: "540x720"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr2.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr2.png",
       type: "image\/png",
       sizes: "540x720"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr3.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr3.png",
       type: "image\/png",
       sizes: "540x720"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr4.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr4.png",
       type: "image\/png",
       sizes: "540x720"
       },
       {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr5.png",
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/scr5.png",
       type: "image\/png",
       sizes: "540x720"
       }
     ],
     serviceworker: {
-      src: "https:\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/serviceworker.js"
+      src: "\/\/cdn.jsdelivr.net\/gh\/kirakyblog\/blog@master\/logo\/serviceworker.js"
     }
   }
 
