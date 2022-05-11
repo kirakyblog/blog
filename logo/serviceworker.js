@@ -102,9 +102,8 @@ self.addEventListener('fetch', function(event) {
 });
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-        .register('https://cdn.statically.io/gh/kirakyblog/blog/main/logo/serviceworker.js')
-        .then(function() {
-            console.log("Service Worker Registered");
-        });
+    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+ for(let registration of registrations) {
+  registration.unregister()
+} });
 }
